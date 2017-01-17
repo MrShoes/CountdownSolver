@@ -1,0 +1,9 @@
+C:\Users\ih\Documents\GitHub\CountdownSolver\ConsoleTestBench\bin\Debug\ConsoleTestBench.exe.config
+C:\Users\ih\Documents\GitHub\CountdownSolver\ConsoleTestBench\bin\Debug\words.txt
+C:\Users\ih\Documents\GitHub\CountdownSolver\ConsoleTestBench\bin\Debug\ConsoleTestBench.exe
+C:\Users\ih\Documents\GitHub\CountdownSolver\ConsoleTestBench\bin\Debug\ConsoleTestBench.pdb
+C:\Users\ih\Documents\GitHub\CountdownSolver\ConsoleTestBench\bin\Debug\WordFinder.dll
+C:\Users\ih\Documents\GitHub\CountdownSolver\ConsoleTestBench\bin\Debug\WordFinder.pdb
+C:\Users\ih\Documents\GitHub\CountdownSolver\ConsoleTestBench\obj\Debug\ConsoleTestBench.csprojResolveAssemblyReference.cache
+C:\Users\ih\Documents\GitHub\CountdownSolver\ConsoleTestBench\obj\Debug\ConsoleTestBench.exe
+C:\Users\ih\Documents\GitHub\CountdownSolver\ConsoleTestBench\obj\Debug\ConsoleTestBench.pdb
