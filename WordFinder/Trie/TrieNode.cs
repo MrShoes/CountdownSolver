@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WordFinder.Trie
 {
-    class TrieNode
+    public class TrieNode
     {
         /// <summary>
         /// Gets or sets the value.
@@ -30,7 +30,7 @@ namespace WordFinder.Trie
         /// <value>
         /// The children.
         /// </value>
-        public IDictionary<char,TrieNode> Children { get; set; }
+        public IList<TrieNode> Children { get; set; }
 
         /// <summary>
         /// Gets or sets the depth.
@@ -59,7 +59,7 @@ namespace WordFinder.Trie
             Value = value;
             Depth = depth;
             Parent = parent;
-            Children = new Dictionary<char, TrieNode>();
+            Children = new List<TrieNode>();
         }
 
         /// <summary>
@@ -69,11 +69,12 @@ namespace WordFinder.Trie
         /// <returns></returns>
         public TrieNode FindChild(char value)
         {
-            if (Children.ContainsKey(value))
-                return Children[value];
-            else
-                return null;
+            return Children.FirstOrDefault(n => n.Value == value);
         }
 
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
     }
 }

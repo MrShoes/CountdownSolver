@@ -6,29 +6,76 @@ using System.Threading.Tasks;
 
 namespace WordFinder.Trie
 {
-    class Trie
+    public class Trie
     {
-        /// <summary>
-        /// Gets or sets the nodes.
-        /// </summary>
-        /// <value>
-        /// The nodes.
-        /// </value>
-        public IDictionary<char, TrieNode> Nodes { get; set; }
+        private readonly TrieNode _root;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Trie"/> class.
+        /// </summary>
         public Trie()
         {
-            Nodes = new Dictionary<char, TrieNode>();
+            _root = new TrieNode('^', 0, null);
         }
 
-        protected TrieNode Prefix(string s)
+        /// <summary>
+        /// Finds the node at the prefix string.
+        /// </summary>
+        /// <param name="prefixString">The prefix string.</param>
+        /// <returns>The node at the prefix string.</returns>
+        public TrieNode Prefix(string prefixString)
         {
-            TrieNode node;
-            if(!Nodes.ContainsKey(s[0]))
-            {
-                node = new TrieNode(s[0], 0, null);
+            var currentNode = _root;
+            var result = currentNode;
 
+            foreach(var character in prefixString)
+            {
+                currentNode = currentNode.FindChild(character);
+                if (currentNode == null)
+                    break;
+                result = currentNode;
             }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Searches for the specified search string.
+        /// </summary>
+        /// <param name="searchString">The search string.</param>
+        /// <returns>True if the word was found.</returns>
+        public bool Search(string searchString)
+        {
+            var prefix = Prefix(searchString);
+            return prefix.Depth == searchString.Length && prefix.FindChild('$') != null;
+        }
+
+        /// <summary>
+        /// Inserts the range of words.
+        /// </summary>
+        /// <param name="words">The words.</param>
+        public void InsertRange(IEnumerable<string> words)
+        {
+            foreach (var word in words)
+                Insert(word);
+        }
+
+        /// <summary>
+        /// Inserts the specified word.
+        /// </summary>
+        /// <param name="word">The word.</param>
+        private void Insert(string word)
+        {
+            var prefix = Prefix(word);
+            var current = prefix;
+            for(var i = current.Depth; i < word.Length; i++)
+            {
+                var node = new TrieNode(word[i], current.Depth + 1, current);
+                current.Children.Add(node);
+                current = node;
+            }
+
+            current.Children.Add(new TrieNode('$', current.Depth + 1, current));
         }
     }
 }

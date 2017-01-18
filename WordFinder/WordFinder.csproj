@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Trie\Trie.cs" />
     <Compile Include="Trie\TrieNode.cs" />

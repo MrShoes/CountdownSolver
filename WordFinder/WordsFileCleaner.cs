@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace WordFinder
 {
     public class WordsFileCleaner
     {
-        private string _fileName;
-
+        private FileLoader _loader;
         /// <summary>
         /// The maximum word length.
         /// In this case, Countdown uses 9 letters.
@@ -22,9 +18,9 @@ namespace WordFinder
         /// Initializes a new instance of the <see cref="WordsFileCleaner"/> class.
         /// </summary>
         /// <param name="filename">The filename.</param>
-        public WordsFileCleaner(string filename = "words.txt")
+        public WordsFileCleaner(FileLoader loader)
         {
-            _fileName = filename;
+            _loader = loader;
         }
 
         /// <summary>
@@ -32,31 +28,9 @@ namespace WordFinder
         /// </summary>
         public void Clean()
         {
-            var words = LoadFile();
+            var words = _loader.LoadFile();
             var cleanedWords = CleanOutWords(words);
             UpdateFile(cleanedWords);
-        }
-
-        /// <summary>
-        /// Loads the file.
-        /// </summary>
-        /// <returns></returns>
-        protected IEnumerable<string> LoadFile()
-        {
-            var words = new List<string>();
-            using (var fileStream = File.OpenRead(_fileName))
-            using (var reader = new StreamReader(fileStream))
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    if (!String.IsNullOrEmpty(line))
-                    {
-                        words.Add(line);
-                    }
-                }
-            }
-            return words;
         }
 
         /// <summary>
@@ -82,7 +56,7 @@ namespace WordFinder
         /// <param name="words">The words.</param>
         protected void UpdateFile(IEnumerable<string> words)
         {
-            using (var fileStream = File.OpenWrite(_fileName))
+            using (var fileStream = File.OpenWrite(_loader.FileName))
             using (var writer = new StreamWriter(fileStream))
             {
                 foreach(var word in words)
