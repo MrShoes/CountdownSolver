@@ -1,6 +1,5 @@
 C:\Users\ih\Documents\GitHub\CountdownSolver\WordFinder\bin\Debug\words.txt
 C:\Users\ih\Documents\GitHub\CountdownSolver\WordFinder\bin\Debug\WordFinder.dll
 C:\Users\ih\Documents\GitHub\CountdownSolver\WordFinder\bin\Debug\WordFinder.pdb
-C:\Users\ih\Documents\GitHub\CountdownSolver\WordFinder\obj\Debug\WordFinder.csprojResolveAssemblyReference.cache
 C:\Users\ih\Documents\GitHub\CountdownSolver\WordFinder\obj\Debug\WordFinder.dll
 C:\Users\ih\Documents\GitHub\CountdownSolver\WordFinder\obj\Debug\WordFinder.pdb

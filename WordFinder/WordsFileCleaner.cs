@@ -18,8 +18,6 @@ namespace WordFinder
         /// </summary>
         private const int MaxWordLength = 9;
 
-        private const string RegexPattern = @"\w{1,9}";
-
         /// <summary>
         /// Initializes a new instance of the <see cref="WordsFileCleaner"/> class.
         /// </summary>
@@ -36,6 +34,7 @@ namespace WordFinder
         {
             var words = LoadFile();
             var cleanedWords = CleanOutWords(words);
+            UpdateFile(cleanedWords);
         }
 
         /// <summary>
@@ -64,18 +63,45 @@ namespace WordFinder
         /// Cleans the useless words.
         /// </summary>
         /// <returns></returns>
-        private IEnumerable<string> CleanOutWords(IEnumerable<string> words)
+        protected IEnumerable<string> CleanOutWords(IEnumerable<string> words)
         {
             var newWords = new List<string>();
-            var regex = new Regex(RegexPattern);
 
-            foreach(var word in words)
+            foreach (var word in words)
             {
-                if (regex.IsMatch(word))
+                if (!HasSpecialChars(word))
                     newWords.Add(word);
             }
 
             return newWords;
         }
+
+        /// <summary>
+        /// Updates the file.
+        /// </summary>
+        /// <param name="words">The words.</param>
+        protected void UpdateFile(IEnumerable<string> words)
+        {
+            using (var fileStream = File.OpenWrite(_fileName))
+            using (var writer = new StreamWriter(fileStream))
+            {
+                foreach(var word in words)
+                {
+                    writer.WriteLine(word);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the string has special characters
+        /// </summary>
+        /// <param name="yourString">Your string.</param>
+        /// <returns></returns>
+        private bool HasSpecialChars(string yourString)
+        {
+            return yourString.Any(ch => !Char.IsLetter(ch));
+        }
+
+
     }
 }
